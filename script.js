@@ -378,7 +378,7 @@ class Resource {
         this.spriteWidth = 318;
         this.spriteHeight = 307;
         this.minFrame = 0;
-        this.maxFrame = 6;
+        this.maxFrame = 6 - 1;
     }
 
     draw() {
@@ -388,6 +388,7 @@ class Resource {
         ctx.drawImage(resource1, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight,
             this.x, this.y, this.width, this.height);
     }
+    
     update() {
         if (frame % 10 === 0) {
             if (this.frameX < this.maxFrame) this.frameX++;
@@ -401,6 +402,7 @@ function handleResources() {
         resources.push(new Resource());
     }
     for (let i = 0; i < resources.length; i++) {
+        resources[i].update();
         resources[i].draw();
         if(resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
             numberOfResources += resources[i].amount;
