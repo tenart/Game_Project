@@ -147,7 +147,6 @@ class Defender {
         this.width = cellSize - cellGap * 2;
         this.height = cellSize - cellGap * 2;
         this.shooting = false;
-        this.health = health;
         this.timer = 0;
         this.frameX = 0;
         this.frameY = 0;
@@ -156,6 +155,13 @@ class Defender {
         this.minFrame = 0;
         this.maxFrame = 6;
         this.chosenDefender = chosenDefender;
+        
+        // Need to set health before drawing
+        if(this.chosenDefender === 1) {
+            this.health = 100;
+        } else if(this.chosenDefender === 2) {
+            this.health = 150;
+        }
     }
 
     draw() {
@@ -163,14 +169,29 @@ class Defender {
         ctx.font = '20px orbitron';
         ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 0);
         if (this.chosenDefender === 1) {
-           this.update(health = 100);
-           ctx.drawImage(defender1, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight,
-            this.x, this.y, this.width, this.height);
-    } else if (this.chosenDefender === 2) {
-            this.update(health = 150);
-            ctx.drawImage(defender2, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight,
-                this.x, this.y, this.width, this.height);}
+            ctx.drawImage(
+                defender1, 
+                this.frameX * this.spriteWidth, 
+                0, 
+                this.spriteWidth, 
+                this.spriteHeight,
+                this.x, this.y, this.width, this.height
+            );
+        } else if (this.chosenDefender === 2) {
+            ctx.drawImage(
+                defender2, 
+                this.frameX * this.spriteWidth, 
+                0, 
+                this.spriteWidth, 
+                this.spriteHeight,
+                this.x, 
+                this.y, 
+                this.width, 
+                this.height
+            );
+        }
     }
+
     update() {
         if (frame % 10 === 0) {
             if (this.frameX < this.maxFrame) this.frameX++;
