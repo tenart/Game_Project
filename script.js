@@ -382,9 +382,14 @@ function handleEnemies(){
 }
 // resources
 const resource1 = new Image();
-resource1.src = 'Sprites/Collectables/goldStar.png';
-const  amounts = [20, 30, 40];
+      resource1.src = 'Sprites/Collectables/goldStar.png';
+const resource2 = new Image();
+      resource2.src = 'Sprites/Collectables/greenStar.png';
+const resource3 = new Image();
+      resource3.src = 'Sprites/Collectables/redStar.png';
+const amounts = [20, 30, 40];
 // also.. lets color these up for different point values.
+
 class Resource {
     constructor() {
         this.x = Math.random() * (canvas.width - cellSize);
@@ -400,13 +405,21 @@ class Resource {
         this.spriteHeight = 307;
         this.minFrame = 0;
         this.maxFrame = 6 - 1;
+
+        if(this.amount === 20) {
+            this.spriteColor = resource2;
+        } else if(this.amount === 30) {
+            this.spriteColor = resource3;
+        } else {
+            this.spriteColor = resource1;
+        }
     }
 
     draw() {
         ctx.fillStyle = 'black';
         ctx.font = '20px orbitron';
         ctx.fillText(this.amount, this.x + 12, this.y + 0);
-        ctx.drawImage(resource1, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight,
+        ctx.drawImage(this.spriteColor, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight,
             this.x, this.y, this.width, this.height);
     }
     
